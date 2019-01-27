@@ -1,0 +1,43 @@
+A simple list, in no particular order of issues and
+bugs that were found when playing with the program.
+
+
+1)
+	Option 7 in userMain searches the user list 
+	via. user id or user name. It is able to 
+	search the list backward by user id,
+	for example user id 1 will set the current
+	node to head, but it will not forward search
+	the list.
+
+
+2)
+	Option 4 in usermain (delete) will delete
+	the node, however when you request to
+	display the deleted user (option 5) the
+	program segfaults.
+
+3)	
+	Node pid are not setting properly. These are
+	supposed to be parrent ids, however they are
+	setting more like uid. (which might be an
+	intersting addition eventually.)
+
+4)
+	When attempting to make a new status in any user
+	an error message is shown saying pro1vided status
+	node is not free, Even when the user has just
+	been created.
+
+5)
+	Creating instance's of status's in general causes
+	a segfault.
+
+6)
+	Add Delete status's
+	and Evetually add delete instances of status's.
+
+7)
+	
+
+
