@@ -1,7 +1,7 @@
 # UserData
 
-This repository contains logic and elements that can help 
-when needing to deal with user information in a C program.
+This repository contains logic (functions) and elements (structs)	
+that can help when needing to deal with user information. 
 
 Instead of producing a binary, it should be compiled into
 position-independant code via. a ".so" file for use with
@@ -11,9 +11,26 @@ After enough enough time has been dedicated to debug I will
 include proper instructions for compile, possibly make/install.
 Any help with efficency in this regard would be appreciated.
 
+## How to use this library.
+
+![Image: Creating Users](visualizations/Creating_Users.jpg)
+
+
 Things I would like to add to this program:
 
  // TODO:
+
+	0.
+	   Update THIS readme to detail how this library
+	   is supposed to be used. As of now this readme
+	   is more about waht needs to be done.
+	
+		The TODO elements in this file  should
+		be moved to the todo.txt file; Saving
+		this file for usage information that
+		includes the visualizations in the
+		visualizations file to help describe
+		the usages.	
 
 	1.
 	   Need functions to free all the pointers in
@@ -28,7 +45,7 @@ Things I would like to add to this program:
 	   runs. This should eventually implement atomicity.
 
 	3.
-	   Add memory alignment and other efficencies to malloc
+	   Add memory alignment and other efficencies to 
 	   wrapper function(s) in format.c source file.
 	   
 	4.
@@ -44,6 +61,10 @@ Things I would like to add to this program:
 	   Important, create linked list modification wrappers.
 		eg. swap prev, swap ahead.
 	   --- There is a high level of code duplication.
+
+	   --  Also adding a pointer to the previous node for
+	       backward searching (doubly linked list) in
+	       each node may increase search efficency.
 
 	7.
 	   Check that all source file are added correctly.
