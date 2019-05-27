@@ -100,6 +100,6 @@ Things I would like to add to this program:
 	9.
 	  Testing.
 
-#As of now:
+# As of now:
 ###   This is a work in progress and is currently not ready for use.
 
