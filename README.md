@@ -35,13 +35,13 @@ passing the data to them.
 *This piece of software is only in it's infancy and still
  needs considerable testing to determine best course-of-action.*
 
-### Here is an example of how functions are called to create a "user".
+### Here is an example of how functions are called to create a "user":
 
 ![Image: Creating Users](visualizations/Creating_Users.jpg)
 
-### which internally looks something like the this:
+### Which internally looks like the this:
 
-#[Image: User internals](visualizations/User_structure.jpg)
+[Image: User internals](visualizations/User_tructure.jpg)
  
 
 
