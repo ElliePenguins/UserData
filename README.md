@@ -42,6 +42,13 @@ passing the data to them.
 ### Which internally looks like the this:
 
 ![Image: User internals](visualizations/User_structure.jpg)
+
+### going a level deeper:
+*Note: at this level it's more for development of this libray
+then anything the user/dev using this library would have
+and interest in.*
+
+![Image: Data internals](visualizations/Data_structure.jpg)
  
 *Note: In the visualization folder there are more images
 that show visually how data is handled and which routines
