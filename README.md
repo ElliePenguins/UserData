@@ -11,7 +11,7 @@ After enough enough time has been dedicated to debug I will
 include proper instructions for compile, possibly make/install.
 Any help with efficency in this regard would be appreciated.
 
-## How to use this library.
+### How to use this library.
 
 This user data library can be used to handle users, their
 status and specific instances of thir status through linked
@@ -35,13 +35,19 @@ passing the data to them.
 *This piece of software is only in it's infancy and still
  needs considerable testing to determine best course-of-action.*
 
+### Here is an example of how functions are called to create a "user".
 
 ![Image: Creating Users](visualizations/Creating_Users.jpg)
 
+### which internally looks something like the this:
 
-Things I would like to add to this program:
+#[Image: User internals](visualizations/User_structure.jpg)
+ 
 
- // TODO:
+
+## Things I would like to add to this software:
+
+## // TODO:
 
 	0.
 	   Update THIS readme to detail how this library
@@ -100,6 +106,6 @@ Things I would like to add to this program:
 	9.
 	  Testing.
 
-# As of now:
+## As of now:
 ###   This is a work in progress and is currently not ready for use.
 
