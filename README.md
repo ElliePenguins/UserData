@@ -13,6 +13,29 @@ Any help with efficency in this regard would be appreciated.
 
 ## How to use this library.
 
+This user data library can be used to handle users, their
+status and specific instances of thir status through linked
+lists of linked lists.
+
+Although the library is called user data, there is no reason
+that it has to be a user and can technically be used to
+track the status of any data.
+
+This library specifically provides the predefined data
+structures and functions that provide the above described
+functionality. As a dev who chooses to use this library
+you only need to create your starting point ( _which should
+be migrated to an initialize routine and hanled in a way 
+that is more invisible to the user._ 
+
+After which creating users, status and instances of those
+status's is done though calling the predifed functions and
+passing the data to them.
+
+*This piece of software is only in it's infancy and still
+ needs considerable testing to determine best course-of-action.*
+
+
 ![Image: Creating Users](visualizations/Creating_Users.jpg)
 
 
@@ -31,6 +54,8 @@ Things I would like to add to this program:
 		includes the visualizations in the
 		visualizations file to help describe
 		the usages.	
+
+	   See the above *how to use this library.*
 
 	1.
 	   Need functions to free all the pointers in
