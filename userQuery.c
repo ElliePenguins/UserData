@@ -15,6 +15,8 @@
  * 	Start Definitions	*
  ********************************/
 
+#include <stdio.h>
+
 #include "userProfile.h"
 
 /* 	User node queries	*
@@ -69,7 +71,7 @@ Status * getNextStatus(Status * status)
    if (status != NULL)
       ptr = status->next;
    
-   return status;
+   return ptr;
 }
 
 Instance * getNextInstance(Instance * instance)
@@ -93,10 +95,22 @@ User * getLastUser(User * user)
 
 Status * getLastStatus(Status * status)
 {
-   while ( status->next != NULL) 
-      status = getNextStatus(status);
+   Status *ptr = NULL;
+   Status *r_ptr = NULL;
+   ptr = getNextStatus(status);
 
-   return status;
+
+   while ( ptr != NULL) 
+   {
+      puts("fail here");
+      ptr = getNextStatus(ptr);
+      if ( ptr == NULL )
+	break;
+      else
+	 r_ptr = ptr;
+   }
+
+   return r_ptr;
 }
 
 Instance * getLastInstance( Instance * instance)
