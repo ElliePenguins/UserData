@@ -41,8 +41,15 @@ passing the data to them.
 
 ### Which internally looks like the this:
 
-[Image: User internals](visualizations/User_tructure.jpg)
+![Image: User internals](visualizations/User_structure.jpg)
  
+*Note: In the visualization folder there are more images
+that show visually how data is handled and which routines
+are called to create said data.*
+
+It is still recommeded that you look at userProfile.h
+and understand the data structures themselves as they
+are in the source file. 
 
 
 ## Things I would like to add to this software:
