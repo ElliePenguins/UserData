@@ -18,8 +18,8 @@ status and specific instances of thir status through linked
 lists of linked lists.
 
 Although the library is called user data, there is no reason
-that it has to be a user and can technically be used to
-track the status of any data.
+that it has to be a user specifically and can technically be
+used to track the status of any data.
 
 This library specifically provides the predefined data
 structures and functions that provide the above described
@@ -100,6 +100,6 @@ Things I would like to add to this program:
 	9.
 	  Testing.
 
-As of now:
-   This is a work in progress and is currently not ready for use.
+#As of now:
+###   This is a work in progress and is currently not ready for use.
 
