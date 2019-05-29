@@ -48,7 +48,7 @@ passing the data to them.
 then anything the user/dev using this library would have
 and interest in.*
 
-![Image: Data internals](visualizations/readme_Images/Data_Structure.JPG")
+![Image: Data internals](visualizations/readme_Images/Data_Structure.JPG)
  
 *Note: In the visualization folder there are more images
 that show visually how data is handled and which routines
