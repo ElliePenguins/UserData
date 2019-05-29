@@ -37,18 +37,18 @@ passing the data to them.
 
 ### Here is an example of how functions are called to create a "user":
 
-![Image: Creating Users](visualizations/Creating_Users.jpg)
+![Image: Creating Users](visualizations/readme_Images/OverView.jpg)
 
 ### Which internally looks like the this:
 
-![Image: User internals](visualizations/User_structure.jpg)
+![Image: User internals](visualizations/readme_Images/Users_Structure.jpg)
 
 ### going a level deeper:
 *Note: at this level it's more for development of this libray
 then anything the user/dev using this library would have
 and interest in.*
 
-![Image: Data internals](visualizations/Data_structure.jpg)
+![Image: Data internals](visualizations/readme_Images/Data_Structure.jpg)
  
 *Note: In the visualization folder there are more images
 that show visually how data is handled and which routines

@@ -13,7 +13,8 @@
  * intended to be used by other developers, this sourcefile
  * will not be compiled into the final project.
  *
- * Again this is for testing and debugging purposes.
+ * Again this source file is for testing and debugging
+ * purposes.
  *
  * This could be a test program, that could check and
  * allow new users to play with createing and deleting
@@ -21,6 +22,7 @@
  *
  * Use this as a reference tool to determine weather we need
  * more higher level functions to wrap the lower.
+ *
  * Think about the ease of use for devs who would
  * use this lib.
  *
