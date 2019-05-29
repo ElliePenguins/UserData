@@ -37,7 +37,7 @@ passing the data to them.
 
 ### Here is an example of how functions are called to create a "user":
 
-![Image: Creating Users](visualizations/readme_Images/OverView.jpg)
+![Image: Creating Users](visualizations/readme_Images/Overview.JPG)
 
 ### Which internally looks like the this:
 
