@@ -218,9 +218,8 @@ void detailDisplay(User * user)
 	 // Remeber that status is a linked list too.
 	 puts("1 - id\n2 - name");
 	 int select2 = (int) prompt(PROMPT);
-
-	 // TODO: Continue debugging here, select2 not working:
-	 if (select2 == 1);
+	 
+	 if (select2 == 1)
 	 {
 	    puts("run");
 	    status = selectStatus(user);
@@ -446,7 +445,10 @@ Status * selectStatusName(User *user)
       prompt(PROMPT);
       char buffer[128];
       fgets(buffer,127,stdin);
+      // ISSUE: status ptr in user not pointer at head!
+      // TODO: fix.
       status = getStatusByName(user->status, buffer);      
+      printf("Debug: %s", user->status->name);
    } 
 
    return status;
