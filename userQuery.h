@@ -29,6 +29,8 @@ char * getUserName(User*);
 int getUserId(User*);
 int getUserParentId(User*);
 
+char * getStatusName(Status*);
+
 Data * getUserDataNode(User*);
 Meta * getUserMetaNode(User*);
 Status * getUserStatusNode(User*);

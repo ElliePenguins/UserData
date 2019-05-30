@@ -28,6 +28,12 @@ char * getUserName(User* user)
       return user->name;
 }
 
+char * getStatusName(Status* status)
+{
+   if (status->name != NULL)
+      return status->name;
+}
+
 int getUserId(User* user)
 {
    return user->id;

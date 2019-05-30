@@ -59,13 +59,13 @@ int deleteUser(User * currentUser, int id)
    {
       if ( currentUser->id == id)
       {
-	User * temp = NULL;
-	temp = currentUser;
-	// Reattach the next ptrs, and free.
-	currentUser = currentUser->next;
-	free(temp);
-	temp = NULL;
-	r_value = 1;
+   User * temp = NULL;
+   temp = currentUser;
+   // Reattach the next ptrs, and free.
+   currentUser = currentUser->next;
+   free(temp);
+   temp = NULL;
+   r_value = 1;
       }
    }
    return r_value;
@@ -83,7 +83,7 @@ Status * addStatus(Status * status )
       // find end of list and add.
       while (status->next != NULL)
       {
-	 status = status->next;
+    status = status->next;
       }
       // Once found, create.
       status->next = createStatus(status->next, "name", "notes");
@@ -108,25 +108,25 @@ int deleteStatus(Status * status, int id)
       statusPtr = status; 
       //TODO : Change all this to use the libs own functions to find nodes.
       do {
-	 if ( statusPtr->id == id)
-	 {
-	   Status * temp = NULL;
-	   temp = statusPtr;
-	   // Reattach the next ptrs, and free.
-	   statusPtr = statusPtr->next;
-	   free(temp);
-	   break;
-	 }
-	 else
-	 {
-	    statusPtr= statusPtr->next;
-	 }
+    if ( statusPtr->id == id)
+    {
+      Status * temp = NULL;
+      temp = statusPtr;
+      // Reattach the next ptrs, and free.
+      statusPtr = statusPtr->next;
+      free(temp);
+      break;
+    }
+    else
+    {
+       statusPtr= statusPtr->next;
+    }
       } while ( statusPtr->next != NULL);
 
       if (statusPtr->id != id)
       {
-	 fprintf(stderr, "User Id to delete not found\n");
-	 r_value = -1;
+    fprintf(stderr, "User Id to delete not found\n");
+    r_value = -1;
       }
    }
 
@@ -154,12 +154,12 @@ Instance * addInstace(User * user, Status * status)
    while (!strcmp(statusPtr->name, name))
    {
       if ( statusPtr->next != NULL)
-	 statusPtr = statusPtr->next;
+    statusPtr = statusPtr->next;
       else
       {
-	 // If the name hasn't been found and you
-	 // and you hit the end of the list. set check. 
-	 fprintf(stderr, "Hit end of list, no status of type found");
+    // If the name hasn't been found and you
+    // and you hit the end of the list. set check. 
+    fprintf(stderr, "Hit end of list, no status of type found");
       }
    }
    
@@ -193,22 +193,22 @@ int deleteInstance(Instance *instance, int id)
    {
       if ( instance->id == id)
       {
-	 free(instance->name);
-	 free(instance->notes);
-	 free(instance->meta);
-	 // Reconnect the list.
-	 if (instance->next != NULL )
-	 {
-	    previous->next = instance->next;
-	 }
-	 // Free node and set return value.
-	 free(instance);
-	 check = 0;
+    free(instance->name);
+    free(instance->notes);
+    free(instance->meta);
+    // Reconnect the list.
+    if (instance->next != NULL )
+    {
+       previous->next = instance->next;
+    }
+    // Free node and set return value.
+    free(instance);
+    check = 0;
       }
       else
       {
-	 previous = instance; // Used to reconnect the list. 
-	 instance = instance->next;
+    previous = instance; // Used to reconnect the list. 
+    instance = instance->next;
       }
 
    } while ( instance->next != NULL);
@@ -243,20 +243,62 @@ User * getUser(User *user, int id)
    {
       do
       {
-	if (user->id == id )
-	{
-	   ptr = user;
-	   break;
-	}
-	else
-	{
-	   user = getNextUser(user);
-	}
+   if (user->id == id )
+   {
+      ptr = user;
+      break;
+   }
+   else
+   {
+      user = getNextUser(user);
+   }
       }  while ( user->next != NULL);
    }
 
    return ptr;
 }
+
+User * getUserByName(User *user, char *name) 
+{
+    User *userPtr = user; 
+
+    while ( userPtr->next != NULL)
+    {
+        if( strcmp(name, getUserName(userPtr)) == 0) 
+	   break;
+        else
+	{
+	   userPtr = userPtr->next;
+
+	   if ( userPtr->next == NULL)
+	      userPtr = NULL; // return null
+	}
+    }
+
+
+    return userPtr;
+}
+
+Status * getStatusByName(Status *status, char *name) 
+{
+    Status *statusPtr = status; 
+
+    while ( statusPtr->next != NULL)
+    {
+        if( strcmp(name, getStatusName(statusPtr)) == 0) 
+	   break;
+        else
+	{
+	   statusPtr = statusPtr->next;
+
+	   if ( statusPtr->next == NULL)
+	      statusPtr = NULL; // return null
+	}
+    }
+
+    return statusPtr;
+}
+
 
 // Should this run off the user list or Status list.
 Status * getStatus(User *user, int id)
@@ -268,14 +310,14 @@ Status * getStatus(User *user, int id)
       ptr = user->status; // head of status.
       while ( ptr->next != NULL )
       {
-	 printf("\nPointer: %p - id: %d\n", ptr->next, ptr->id);
-	 if ( ptr->id == id )
-	 {
-	    ptr = user->status;
-	    break;
-	 }
-	 else
-	    ptr = ptr->next;
+    printf("\nPointer: %p - id: %d\n", ptr->next, ptr->id);
+    if ( ptr->id == id )
+    {
+       ptr = user->status;
+       break;
+    }
+    else
+       ptr = ptr->next;
       }
    }
 
@@ -294,12 +336,12 @@ Instance * getInstance(Status *status, int id)
    {
       if ( current->id == id )
       {
-	 //WTF IS THIS!
-	 ptr = current;
-	 break;
+    //WTF IS THIS!
+    ptr = current;
+    break;
       }
       else
-	 current = current->next;
+    current = current->next;
 
    } while ( current->next != NULL );
 
@@ -325,34 +367,34 @@ User * sortUser( User * user, int numberOfNodes, int sortMethod)
    {
       do
       {
-	 sorted = 0;
-	 for(i = 0; i < numberOfNodes; i++)
-	 {
-	   if (strcmp(user->name, user->next->name) == 0)
-	   {
-	      if ( user->id == 1 || user->next->id == 1)
-	      {
-		 ; // Do not move the head node.
-		 sorted = 1;
-	      }
-	      else
-	      {
-		 // decalared in userProfile.h
-		 swapUserNodes(prev); // Could be easier to pass user and prev. 
-		 sorted = 1;
-	      }
-	   }
-	   else
-	   {
-	      // Advance the list by one node.
-	      prev = user;
-	      user = user->next;
-	   }
-	 } 
-	 if ( !sorted )
-	 {
-	    complete = 1;
-	 }
+    sorted = 0;
+    for(i = 0; i < numberOfNodes; i++)
+    {
+      if (strcmp(user->name, user->next->name) == 0)
+      {
+         if ( user->id == 1 || user->next->id == 1)
+         {
+       ; // Do not move the head node.
+       sorted = 1;
+         }
+         else
+         {
+       // decalared in userProfile.h
+       swapUserNodes(prev); // Could be easier to pass user and prev. 
+       sorted = 1;
+         }
+      }
+      else
+      {
+         // Advance the list by one node.
+         prev = user;
+         user = user->next;
+      }
+    } 
+    if ( !sorted )
+    {
+       complete = 1;
+    }
 
       } while (!complete);
    }
@@ -378,31 +420,31 @@ Status * sortStatus(Status * status, int numberOfNodes, int sortMethod)
    if ( sortMethod == SORT_FORWARD)
    {
       do {
-	 sorted  = 0;
-	 for ( i =0; i < numberOfNodes; i++)
-	 {
-	    if ( strcmp(status->name, status->next->name) == 0 )
-	    {
-	      if ( status->id == 1 || status->next->id == 1)
-	      {
-		 ; // Do not move the head node.
-		 sorted = 1;
-	      }
-	      else
-	      {
-		 swapStatusNode(prev); // Could be easier to pass user and prev. 
-		 sorted = 1;
-	      }
-	    }
+    sorted  = 0;
+    for ( i =0; i < numberOfNodes; i++)
+    {
+       if ( strcmp(status->name, status->next->name) == 0 )
+       {
+         if ( status->id == 1 || status->next->id == 1)
+         {
+       ; // Do not move the head node.
+       sorted = 1;
+         }
+         else
+         {
+       swapStatusNode(prev); // Could be easier to pass user and prev. 
+       sorted = 1;
+         }
+       }
 
-	    prev = status;
-	    status = status->next;
-	    
-	    if ( !sorted )
-	    {
-	       complete = 1;
-	    }
-	 } 
+       prev = status;
+       status = status->next;
+       
+       if ( !sorted )
+       {
+          complete = 1;
+       }
+    } 
       } while ( !complete );
 
    }
@@ -428,7 +470,7 @@ Instance * sortInstance(Status *, int sortMethod)
  * etc. functions. */
 
 // TODO: Allow function to change more then just 
-// 	 the name, eg. notes etc.
+//     the name, eg. notes etc.
 User * editUser(User * user, char * name)
 {
    if ( user->name != NULL )
@@ -483,8 +525,8 @@ User * getUserInfo( User * )
 */
 
 /* TODO: The below two functions reutnr the notes contained within
- * 	 the node. It is important to remember that these have no
- * 	 protections. consider casting to const or returning new ptr. */
+ *     the node. It is important to remember that these have no
+ *     protections. consider casting to const or returning new ptr. */
 
 // This function returns the notes contained withing the nodes.
 char * getStatusInfo(User *user, int id)
@@ -526,25 +568,25 @@ int * deleteUser(User * currentUser, int id)
       User * userPtr = currentUser;
       userPtr = currentUser; 
       do {
-	 if ( userPtr->id == id)
-	 {
-	   User * temp = NULL;
-	   temp = userPtr;
-	   // Reattach the next ptrs, and free.
-	   userPtr = userPtr->next;
-	   free(temp);
-	   break;
-	 }
-	 else
-	 {
-	    userPtr = userPtr->next;
-	 }
+    if ( userPtr->id == id)
+    {
+      User * temp = NULL;
+      temp = userPtr;
+      // Reattach the next ptrs, and free.
+      userPtr = userPtr->next;
+      free(temp);
+      break;
+    }
+    else
+    {
+       userPtr = userPtr->next;
+    }
       } while(userPtr->next != NULL);
       
       // TODO: Clean this up.
       if (userPtr->next == NULL)
       {
-	 fprintf(stderr, "User Id to delete not found\n");
+    fprintf(stderr, "User Id to delete not found\n");
       }
    }
 }

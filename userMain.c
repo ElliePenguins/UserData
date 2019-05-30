@@ -53,6 +53,7 @@ Status* makeNewStatus( Status *);
 void makeNewInstance( Status *);
 User * selectUser(User *);
 Status * selectStatus(User *);
+Status * selectStatusName(User *user);
 int prompt ( char * str );
 
 // Detailed outputs.
@@ -215,7 +216,20 @@ void detailDisplay(User * user)
 	 break;
       case 2:
 	 // Remeber that status is a linked list too.
-	 status = selectStatus(user);
+	 puts("1 - id\n2 - name");
+	 int select2 = (int) prompt(PROMPT);
+
+	 // TODO: Continue debugging here, select2 not working:
+	 if (select2 == 1);
+	 {
+	    puts("run");
+	    status = selectStatus(user);
+	 }
+	 if (select2 = 2)
+	 {
+	    puts("run");
+	    status = selectStatusName(user);
+	 }
 	 outputStatus(user, status);
 	 break;
       case 3:
@@ -422,6 +436,22 @@ Status * selectStatus(User *user)
    return status;
 }
 
+Status * selectStatusName(User *user)
+{
+   Status *status = NULL;
+
+   if ( user != NULL )
+   {
+      puts("Please Enter Status name.");      
+      prompt(PROMPT);
+      char buffer[128];
+      fgets(buffer,127,stdin);
+      status = getStatusByName(user->status, buffer);      
+   } 
+
+   return status;
+}
+
 User * selectUser( User * user) {
 
    User * userPtr = NULL;
@@ -458,6 +488,7 @@ User * selectUser( User * user) {
 	 prompt(PROMPT);
 	 fgets(buffer, 127, stdin);
 
+	 /*
 	 userPtr = user;
 	 // This could potentially be a function as well.
 	 while ( user->next != NULL)
@@ -467,6 +498,9 @@ User * selectUser( User * user) {
 	     else
 		userPtr = userPtr->next;
 	 }
+	 */
+	 userPtr = getUserByName(user, buffer);
+
 	 if (userPtr == NULL)
 	    fprintf(stderr, "Node with userName %s, not found\n", buffer);
       }

@@ -57,6 +57,11 @@ User * getUser(User *, int id);
 Status * getStatus(User*, int id);
 Instance * getInstance(Status *, int id);
 
+// Get user by searching by name.
+User * getUserByName(User *user, char *id); 
+Status * getStatusByName(Status *status, char *id); 
+//User * getInstance(Instance *instance, int id); // Can't think of a use for this. 
+
 // Sort list functions, based on any way for any reason.
 User * sortUser(User *, int numberOfNodes, int sortMethod);
 Status * sortStatus(Status *, int numberOfNodes, int sortMethod); 
