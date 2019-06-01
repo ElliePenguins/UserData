@@ -1,0 +1,10 @@
+
+
+#ignore binaries
+*.exe
+*.o
+*.so
+
+#ignore specific files
+a.out
+other
