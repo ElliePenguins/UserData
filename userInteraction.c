@@ -72,11 +72,11 @@ int deleteUser(User * currentUser, int id)
 }
 
 // Pass it the head node.
-Status * addStatus(Status * status )
+Status * addStatus(Status * status, char *name, char *notes)
 {
    if ( status == NULL )
    {
-      status = createStatus(status, "name", "notes");
+      status = createStatus(status, name, notes);
    }
    else
    {
@@ -86,7 +86,7 @@ Status * addStatus(Status * status )
     status = status->next;
       }
       // Once found, create.
-      status->next = createStatus(status->next, "name", "notes");
+      status->next = createStatus(status->next, name, notes);
       status = status->next;
    }
 
@@ -285,14 +285,16 @@ Status * getStatusByName(Status *status, char *name)
 
     while ( statusPtr->next != NULL)
     {
+	    printf("DEBUG StatusByName(): %s\n", statusPtr->name);
         if( strcmp(name, getStatusName(statusPtr)) == 0) 
 	   break;
         else
 	{
 	   statusPtr = statusPtr->next;
-
+/*
 	   if ( statusPtr->next == NULL)
-	      statusPtr = NULL; // return null
+	      statusPtr = NULL; // return null, not found.
+	      */
 	}
     }
 

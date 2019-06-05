@@ -38,6 +38,7 @@ bugs that were found when playing with the program.
 	and Evetually add delete instances of status's.
 
 7)
+	need add node to list functions.
 	
 
 

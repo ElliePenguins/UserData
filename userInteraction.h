@@ -37,7 +37,7 @@ User * addUser(User *, char *name);
 User * initNewUser(User *);
 int deleteUser(User *, int id);
 
-Status * addStatus(Status *);
+Status * addStatus(Status *, char *name, char *notes);
 Status * initNewStatus(Status *);
 int deleteStatus(Status *, int id);
 

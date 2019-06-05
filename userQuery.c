@@ -99,21 +99,40 @@ User * getLastUser(User * user)
    return userPtr;
 }
 
+/*
+ * causes segfault?
+User * getLastStatus(User * user)
+{
+   User *userPtr = user;
+
+   while ( userPtr->next != NULL)
+   {
+      userPtr = userPtr->next; 
+   }
+
+   return userPtr;
+}
+*/
+
 Status * getLastStatus(Status * status)
 {
-   Status *ptr = NULL;
-   Status *r_ptr = NULL;
-   ptr = getNextStatus(status);
-
-
-   while ( ptr != NULL) 
+   Status *ptr = status;
+   Status *r_ptr = status;
+   
+   while ( ptr->next != NULL) 
    {
       puts("fail here");
       ptr = getNextStatus(ptr);
-      if ( ptr == NULL )
-	break;
-      else
+      if ( ptr->next == NULL )
+      {
+	 printf("debug laststatus: %s", ptr->name);
 	 r_ptr = ptr;
+	break;
+      }
+      else
+      {
+	 ptr = ptr->next;
+      }
    }
 
    return r_ptr;

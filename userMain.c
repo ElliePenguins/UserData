@@ -114,8 +114,17 @@ int main ( void )
 	   break;
 	case 2: 
 	   // Note: getStatus uses element 0 to say get head node.
-	   userPtr->status = getNextStatus(getNextStatus(userPtr->status));
-	   userPtr->status= makeNewStatus(userPtr->status);
+	   // TODO: SEGFAULT when printf debug status name.
+	   printf("Debug above: %d\n", userPtr->status);
+	   printf("Debug above: %s\n", userPtr->status->name);
+
+	   Status *status = getLastStatus(userPtr->status);
+	   printf("Debug: %d", userPtr->status);
+	   // Find a way to append the new node to the end of the list:
+	   // continue from here:
+	   makeNewStatus(status);
+	   
+	   
 	   break;
 	case 3:
 	   makeNewInstance(userPtr->status);   
@@ -376,10 +385,6 @@ User * makeNewUser( User * user)
 
 Status * makeNewStatus( Status * status)
 {
-   // There is no possibility of status == NULL.
-   if (status == NULL )
-   {
-      status = (Status*) getLastStatus(status);
       char buffer[128];
       char notes_buffer[128];	// Testing only, notes can be much larger.
       printf("Please Enter status Name.");
@@ -389,12 +394,16 @@ Status * makeNewStatus( Status * status)
       prompt(PROMPT);
       fgets (notes_buffer, 127, stdin);
 
-      status = createStatus(status, buffer, notes_buffer);
+      Status *ptr = addStatus(status, buffer, notes_buffer);
+
+      //ptr = createStatus(status, buffer, notes_buffer);
+	
+      /*
    }
    else
       fprintf(stderr, "\nError: Provided Status node is not free.\n");
-
-   return status;
+*/
+   return ptr;
 }
 
 void makeNewInstance( Status * status)

@@ -22,6 +22,16 @@
  * TODO:
  * 		Functions to free memory properly.
  *
+ * TODO:
+ * 		functions that wrap create functions to
+ * 		append new nodes to the respective
+ * 		linked list by reference instead of
+ * 		by returns, expecting the library
+ * 		user to handle adding.
+ * 		(although that should still be an
+ * 		option if they wish via the original
+ * 		routines.)
+ *
  * MIT License
  * Copyright (c) 2017 ElliePenguins 
  */
