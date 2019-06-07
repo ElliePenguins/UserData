@@ -109,7 +109,7 @@ int main ( void )
 	   end = !end;
 	   break;
 	case 1:
-	   userPtr->next = makeNewUser(user);  
+	   makeNewUser(user);  // Always Pass head node.
 	   userPtr = getNextUser(userPtr);  // TODO: Use functions to advance ptr.
 	   break;
 	case 2: 
@@ -372,12 +372,18 @@ User * makeNewUser( User * user)
    // Create input validation, however this is a simple test sourcefile. it
    // might be a better idea to make these their own module at that point.
 
+   // TODO: Modify this to use the add user function. like below.
+  
+
    if (user != NULL)
+      addUser(getLastUser(user), buffer);
+	   /*
    {
       uPtr = getLastUser(user);
       uPtr = uPtr->next;
    }
    uPtr = createUser(uPtr, buffer);
+   */
 
    // Return new node.
    return uPtr;

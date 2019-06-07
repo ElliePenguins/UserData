@@ -38,11 +38,34 @@
  * TODO: Implement the ability to sort by date.
  */
 
+/*
 User * addUser(User * newUser, char *name)
 {
    // TODO: createUser might not need prev user?
    newUser = createUser(NULL, name);
    return newUser;
+}
+*/
+
+User* addUser(User* user, char *name)
+{
+   if ( user == NULL )
+   {
+      user = createUser(user, name);
+   }
+   else
+   {
+      // find end of list and add.
+      while (user->next != NULL)
+      {
+	 user = user->next;
+      }
+      // Once found, create.
+      user->next = createUser(user->next, name);
+      user = user->next;
+   }
+
+   return user;
 }
 
 // Give it the head node,
