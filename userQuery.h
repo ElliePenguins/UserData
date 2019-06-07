@@ -31,9 +31,9 @@ int getUserParentId(User*);
 
 char * getStatusName(Status*);
 
-Data * getUserDataNode(User*);
-Meta * getUserMetaNode(User*);
-Status * getUserStatusNode(User*);
+Data * getUserData(User*);
+Meta * getUserMeta(User*);
+Status * getUserStatus(User*);
 
 // Easy way to get the next node?
 User * getNextUser(User*);

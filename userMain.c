@@ -46,6 +46,8 @@ void printLine ( int numberOfStars, char character);
 void printSpace ( int numberOfSpaces );
 void waitKey(void);
 
+// TODO: Maybe save some of these? or consider
+//     turning them into a kind of wrapper?
 void display(User *);
 void detailDisplay(User *);
 User* makeNewUser( User *);
@@ -78,7 +80,7 @@ int main ( void )
    // Don't wannt mess around and lose the head. 
    User *userPtr = user;
 
-   // Newline.
+   // Formatting.
    printf("\n\n\n");
 
    while (1) {
@@ -105,78 +107,64 @@ int main ( void )
      
      switch (selection)
      {
-	case 0:
-	   end = !end;
-	   break;
-	case 1:
-	   makeNewUser(user);  // Always Pass head node.
-	   userPtr = getNextUser(userPtr);  // TODO: Use functions to advance ptr.
-	   break;
-	case 2: 
-	   // Note: getStatus uses element 0 to say get head node.
-	   // TODO: SEGFAULT when printf debug status name.
-	   printf("Debug above: %d\n", userPtr->status);
-	   printf("Debug above: %s\n", userPtr->status->name);
-
-	   Status *status = getLastStatus(userPtr->status);
-	   printf("Debug: %d", userPtr->status);
-	   // Find a way to append the new node to the end of the list:
-	   // continue from here:
-	   makeNewStatus(status);
-	   
-	   
-	   break;
-	case 3:
-	   makeNewInstance(userPtr->status);   
-	   		// todo: Modify to use getStatus instead. 
-			// Or maybe create a set to last node for this one.
-	   break;
-	case 4:
-	   userPtr = selectUser(user);
-	   deleteUser(user, getUserId(user));
-	   puts("\nNot Available.");
-	   break;
-	case 5:
-	   display(userPtr); //TODO: expand on this. 
-	   waitKey();
-	   break;
-	case 6:
-	   if ( user == NULL )
-	      userPtr = selectUser(user);
-	   if (userPtr != NULL)
-	   {
-	      detailDisplay(userPtr); // show options to output internals.
-	   }
-	   break;
-	case 7:
-	   userPtr = selectUser(user);
-	   // If NULL is returned, Reset to head pointer.
-	   if ( userPtr == NULL )
-	      userPtr = user;		// Debug.
-	   break;
-	default:
-	   break;
+   case 0:
+      end = !end;
+      break;
+   case 1:
+      makeNewUser(user);  // Always Pass head node.
+      userPtr = getNextUser(userPtr); 
+      break;
+   case 2: 
+      makeNewStatus(getLastStatus(userPtr->status));
+      break;
+   case 3:
+      // TODO: continue from here.
+      makeNewInstance(getStatus(userPtr, 0));   
+            // todo: Modify to use getStatus instead. 
+         // Or maybe create a set to last node for this one.
+      break;
+   case 4:
+      userPtr = selectUser(user);
+      deleteUser(user, getUserId(user));
+      puts("\nNot Available.");
+      break;
+   case 5:
+      display(userPtr); //TODO: expand on this. 
+      waitKey();
+      break;
+   case 6:
+      detailDisplay(userPtr); // show options to output internals.
+      break;
+   case 7:
+      // TODO: modify selectUser to return somthing useful.
+      userPtr = selectUser(user);
+      // If NULL is returned, Reset to head pointer.
+      if ( userPtr == NULL )
+         userPtr = user;   
+      break;
+   default:
+      break;
 
      }
 
      //userPtr = getLastUser(user);
      if (userPtr != NULL)
      {
-	printSpace(2);
-	printLine(25, '*');
-	printf("User node with id: %d, selected.\n", userPtr->id);
-	printLine(25, '*');
+   printSpace(2);
+   printLine(25, '*');
+   printf("User node with id: %d, selected.\n", userPtr->id);
+   printLine(25, '*');
      }
      else
      {
-	printSpace(2);
-	puts("No Node is Currently Selected.");
+   printSpace(2);
+   puts("No Node is Currently Selected.");
      }
 
      // If end flag is set, 
      // stop the loop & end the program.
      if ( end == 1 )
-	break;
+   break;
    }
 
    // Delete all allocated memory for all elements.
@@ -193,6 +181,7 @@ int main ( void )
 
 }
 
+// ------------------------------------------------------------
 // These functions help create a men in the main function above,
 // They allow the user to play with the functions in a predictable
 // manner to allow the user to get a feel for how to use the
@@ -221,30 +210,29 @@ void detailDisplay(User * user)
    switch(select)
    {
       case 1:
-	 outputUser(user);
-	 break;
+    outputUser(user);
+    break;
       case 2:
-	 // Remeber that status is a linked list too.
-	 puts("1 - id\n2 - name");
-	 int select2 = (int) prompt(PROMPT);
-	 
-	 if (select2 == 1)
-	 {
-	    puts("run");
-	    status = selectStatus(user);
-	 }
-	 if (select2 = 2)
-	 {
-	    puts("run");
-	    status = selectStatusName(user);
-	 }
-	 outputStatus(user, status);
-	 break;
+    // Remeber that status is a linked list too.
+    puts("1 - id\n2 - name");
+    int select2 = (int) prompt(PROMPT);
+    
+    if (select2 == 1)
+    {
+       status = selectStatus(user);
+    }
+    else if(select2 = 2)
+    {
+       status = selectStatusName(user);
+    }
+
+    outputStatus(user, status);
+    break;
       case 3:
-	 outputMeta(user);
-	 break;
+       outputMeta(user);
+    break;
       default:
-	 break;
+    break;
    }
 }
 
@@ -255,10 +243,10 @@ void outputStatus( User * user, Status * status)
       puts("***************");
       printf("Status node address: %p\n", status);
       printf("Status Name: %s \nStatus ID: %d\nStatus Pid: %d",
-	    // TODO: Status node output functions.
-	    status->name,
-	    status->id,
-	    status->parentId);
+       // TODO: Status node output functions.
+       status->name,
+       status->id,
+       status->parentId);
       printf("\nIncluded Notes: %s", status->notes);
       waitKey();
 }
@@ -269,19 +257,19 @@ void outputUser( User * user )
       puts(getUserName(user));
       printf("User Node Address: %p\n", user);
       printf("id: %d - pid: %d\n", 
-	    getUserId(user),
-	    getUserParentId(user));
+       getUserId(user),
+       getUserParentId(user));
 
       printf("\nUser: %s -> Data\n", user->name);
       puts("***************");
       printf("Data node address: %p\n", user->data);
 
       printf("NumberOfNodes: %d\n"\
-	    "NumberOfStatusNodes: %d\n"\
-	    "NumberOfInstanceNodes: %d\n",
-	    user->data->numberOfNodes, 
-	    user->data->numberOfStatusNodes, 
-	    user->data->numberOfInstanceNodes);
+       "NumberOfStatusNodes: %d\n"\
+       "NumberOfInstanceNodes: %d\n",
+       user->data->numberOfNodes, 
+       user->data->numberOfStatusNodes, 
+       user->data->numberOfInstanceNodes);
       puts("***************");
       waitKey();
 }
@@ -292,14 +280,14 @@ void outputMeta (User * user )
       puts("***************");
       printf("Meta node address: %p\n", user->meta);
       printf("Creation Hash: %s\n"\
-	    "Last Modified Hash: %s\n",
-	    getCreationHash(user->meta),
-	    getLastModifiedHash(user->meta));
-      	// TODO: modify above to user getMeta
+       "Last Modified Hash: %s\n",
+       getCreationHash(user->meta), // example: getMeta(user);
+       getLastModifiedHash(user->meta));
+         // TODO: modify above to user getMeta
       printf("Creation Time: %lld\n"\
-	    "Last Modified Time: %lld\n",
-	    getCreationTime(user->meta),
-	    getModificationTime(user->meta));
+       "Last Modified Time: %lld\n",
+       getCreationTime(user->meta),
+       getModificationTime(user->meta));
       puts("***************");
       waitKey();
 }
@@ -316,7 +304,7 @@ int menu( void )
    puts(" 1\t-\tNew User");
    puts(" 2\t-\tNew Status in User");
    puts(" 3\t-\tNew Instance of Status");
-   puts(" 4\t-\tDelete User"); // Need delete, status / instance too.
+   puts(" 4\t-\tDelete User"); // Need delete status / instance too.
    puts(" 5\t-\tDisplay");
    puts(" 6\t-\tDetailed Display");
    puts(" 7\t-\tSelect User");
@@ -343,6 +331,7 @@ int prompt ( char * str )
 void printSpace ( int numberOfSpaces )
 {
    int i = 0;
+   // demo module, but still alot of syscalls.
    for ( i = 0; i < numberOfSpaces; i++)
       printf("\n");
 }
@@ -372,27 +361,16 @@ User * makeNewUser( User * user)
    // Create input validation, however this is a simple test sourcefile. it
    // might be a better idea to make these their own module at that point.
 
-   // TODO: Modify this to use the add user function. like below.
-  
-
    if (user != NULL)
       addUser(getLastUser(user), buffer);
-	   /*
-   {
-      uPtr = getLastUser(user);
-      uPtr = uPtr->next;
-   }
-   uPtr = createUser(uPtr, buffer);
-   */
 
-   // Return new node.
    return uPtr;
 }
 
 Status * makeNewStatus( Status * status)
 {
       char buffer[128];
-      char notes_buffer[128];	// Testing only, notes can be much larger.
+      char notes_buffer[128]; // Testing only, notes can be much larger.
       printf("Please Enter status Name.");
       prompt(PROMPT);
       fgets (buffer, 127, stdin);
@@ -402,13 +380,6 @@ Status * makeNewStatus( Status * status)
 
       Status *ptr = addStatus(status, buffer, notes_buffer);
 
-      //ptr = createStatus(status, buffer, notes_buffer);
-	
-      /*
-   }
-   else
-      fprintf(stderr, "\nError: Provided Status node is not free.\n");
-*/
    return ptr;
 }
 
@@ -429,15 +400,14 @@ void display(User *user)
       puts(getUserName(user));
       printf("User Node Address: %p\n", user);
       printf("id: %d - pid: %d\n", 
-	    getUserId(user),
-	    getUserParentId(user));
+       getUserId(user),
+       getUserParentId(user));
       printLine(11, '-');
    }
 }
 
 Status * selectStatus(User *user)
 {
-
    Status *status = NULL;
 
    if ( user != NULL )
@@ -460,8 +430,7 @@ Status * selectStatusName(User *user)
       prompt(PROMPT);
       char buffer[128];
       fgets(buffer,127,stdin);
-      // ISSUE: status ptr in user not pointer at head!
-      // TODO: fix.
+
       status = getStatusByName(user->status, buffer);      
       printf("Debug: %s", user->status->name);
    } 
@@ -486,43 +455,33 @@ User * selectUser( User * user) {
       
       if ( selection == 1)
       {
-	 puts("Please Enter Node Id");
-	 int nodeId = prompt(PROMPT);
+    puts("Please Enter Node Id");
+    int nodeId = prompt(PROMPT);
 
-	 userPtr = getUser(user, nodeId);
-	 if ( userPtr == NULL )
-	 {
-	    printSpace(2); 
-	    printLine( strlen(BANNER), '*');
-	    printf("Node with id: %d, not found\n", nodeId);
-	    printLine( strlen(BANNER), '*');
-	 }
+    userPtr = getUser(user, nodeId);
+    if ( userPtr == NULL )
+    {
+       printSpace(2); 
+       printLine( strlen(BANNER), '*');
+       printf("Node with id: %d, not found\n", nodeId);
+       printLine( strlen(BANNER), '*');
+    }
       }
       else if ( selection == 2)
       {
-	 char buffer[128];
-	 printf("\nEnter The Name: ");
-	 prompt(PROMPT);
-	 fgets(buffer, 127, stdin);
+    char buffer[128];
+    printf("\nEnter The Name: ");
+    prompt(PROMPT);
+    fgets(buffer, 127, stdin);
 
-	 /*
-	 userPtr = user;
-	 // This could potentially be a function as well.
-	 while ( user->next != NULL)
-	 {
-	     if( strcmp(buffer, getUserName(userPtr)) == 0) 
-		break;
-	     else
-		userPtr = userPtr->next;
-	 }
-	 */
-	 userPtr = getUserByName(user, buffer);
+    userPtr = getUserByName(user, buffer);
 
-	 if (userPtr == NULL)
-	    fprintf(stderr, "Node with userName %s, not found\n", buffer);
+    if (userPtr == NULL)
+       // TODO: This needs to be built into the library.
+       fprintf(stderr, "Node with userName %s, not found\n", buffer);
       }
       else
-	 puts("Invalid");
+    puts("Invalid");
    }
 
    return userPtr; // Return found node.
@@ -552,9 +511,9 @@ User * selectUser( User * user) {
 
 /*
  * TODO:
- * 	 getStatus functions inside of userQuery need to be
- * 	 modified to work from a user pointer not from	
- * 	 userPtr -> status. This complicates things unnecesarily.
+ *     getStatus functions inside of userQuery need to be
+ *     modified to work from a user pointer not from  
+ *     userPtr -> status. This complicates things unnecesarily.
 
 
    // Bug avoidance.
@@ -571,3 +530,16 @@ User * selectUser( User * user) {
    Meta * metaPtr = getUserMetaNode(userPtr);
    Status * statusPtr = getUserStatusNode(userPtr);
    */
+/*
+ * unused Code from main menu:
+ *
+   case 6:
+      // Select user in the menu?
+      if ( user == NULL )
+         userPtr = selectUser(user);
+      if (userPtr != NULL)
+      {
+         detailDisplay(userPtr); // show options to output internals.
+      }
+      break;
+*/

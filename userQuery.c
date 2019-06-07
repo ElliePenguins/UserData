@@ -45,17 +45,17 @@ int getUserParentId(User* user)
 }
 
 // Return the head node contained within each user.
-Data * getUserDataNode(User* user)
+Data * getUserData(User* user)
 {
    return user->data;
 }
 
-Meta * getUserMetaNode(User* user)
+Meta * getUserMeta(User* user)
 {
    return user->meta;
 }
 
-Status * getUserStatusNode(User* user)
+Status * getUserStatus(User* user)
 {
    return user->status;
 }
