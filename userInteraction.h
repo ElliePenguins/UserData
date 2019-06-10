@@ -45,6 +45,9 @@ Instance * addInstace(User *, Status *);
 Instance * initNewInstance(User *, Status *);
 //int deleteInstance(User *, Status *); Why would someone need this?
 
+// Update number of nodes in data.
+int updateStatusNumber(User * user);
+
 // Check hashes in meta.
 User * validateUser(User *);
 Status * validateStatus(User *, int statusId);

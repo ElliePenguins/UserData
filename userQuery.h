@@ -44,6 +44,12 @@ User* getLastUser(User*);
 Status * getLastStatus(Status*);
 Instance * getLastInstance(Instance*);
 
+// * Count Actual Nodes *
+// **********************
+int countUser(User * user);
+int countStatus(Status * status);
+int countInstance(User * status);
+
 
 /*	Data Node Queries	*
  ********************************/

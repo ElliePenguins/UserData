@@ -58,7 +58,7 @@ User* addUser(User* user, char *name)
       // find end of list and add.
       while (user->next != NULL)
       {
-	 user = user->next;
+			user = user->next;
       }
       // Once found, create.
       user->next = createUser(user->next, name);
@@ -66,6 +66,27 @@ User* addUser(User* user, char *name)
    }
 
    return user;
+}
+
+int updateStatusNumber(User * user)
+{
+	Status * sPtr = NULL; 
+ 	int sCount = 0;
+
+	if ( user != NULL )
+		sPtr = user->status;
+
+	// count:
+	while ( sPtr->next != NULL)
+	{
+		sPtr = getNextStatus(sPtr);
+		sCount++;
+	}
+
+	// Update data in user node.
+	user->data->numberOfStatusNodes = sCount;
+	
+	return sCount;
 }
 
 // Give it the head node,
@@ -288,13 +309,13 @@ User * getUserByName(User *user, char *name)
     while ( userPtr->next != NULL)
     {
         if( strcmp(name, getUserName(userPtr)) == 0) 
-	   break;
+		break;
         else
 	{
-	   userPtr = userPtr->next;
+		userPtr = userPtr->next;
 
-	   if ( userPtr->next == NULL)
-	      userPtr = NULL; // return null
+		if ( userPtr->next == NULL)
+			userPtr = NULL; // return null
 	}
     }
 
@@ -308,16 +329,16 @@ Status * getStatusByName(Status *status, char *name)
 
     while ( statusPtr->next != NULL)
     {
-	    printf("DEBUG StatusByName(): %s\n", statusPtr->name);
+		 printf("DEBUG StatusByName(): %s\n", statusPtr->name);
         if( strcmp(name, getStatusName(statusPtr)) == 0) 
-	   break;
+		break;
         else
 	{
-	   statusPtr = statusPtr->next;
+		statusPtr = statusPtr->next;
 /*
-	   if ( statusPtr->next == NULL)
-	      statusPtr = NULL; // return null, not found.
-	      */
+		if ( statusPtr->next == NULL)
+			statusPtr = NULL; // return null, not found.
+			*/
 	}
     }
 
@@ -614,5 +635,44 @@ int * deleteUser(User * currentUser, int id)
     fprintf(stderr, "User Id to delete not found\n");
       }
    }
+}
+*/
+
+/*
+ * Temp.
+int updateData(User * user)
+{
+	User * ptr;
+	Status * sPtr;
+	int sNodes = 0;
+	int uNodes = 0;
+
+	while ( ptr->next != NULL)
+	{
+		int i = 0;
+		ptr = getNextUser(ptr);
+		uNodes++;
+
+		// Update to use GetStatus;
+		sPtr = ptr->status; 
+
+		if ( sPtr != NULL )
+			while(sPtr->next != NULL) 
+			{
+
+				sPtr = getNextStatus(sPtr);
+				sNodes++;
+
+			}
+
+		ptr->data->numberOfStatusNodes = sNodes;
+		sNodes = 0;
+
+	}
+
+	// Only sets the number of Status nodes in each
+	// user node atm.
+	
+	return sNodes;
 }
 */

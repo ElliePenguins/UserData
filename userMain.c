@@ -116,6 +116,8 @@ int main ( void )
       break;
    case 2: 
       makeNewStatus(getLastStatus(userPtr->status));
+      // update data has to be done manually for now.
+      updateStatusNumber(userPtr);
       break;
    case 3:
       // TODO: continue from here.

@@ -121,12 +121,10 @@ Status * getLastStatus(Status * status)
    
    while ( ptr->next != NULL) 
    {
-      puts("fail here");
       ptr = getNextStatus(ptr);
       if ( ptr->next == NULL )
       {
-	 printf("debug laststatus: %s", ptr->name);
-	 r_ptr = ptr;
+	r_ptr = ptr;
 	break;
       }
       else
