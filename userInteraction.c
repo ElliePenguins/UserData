@@ -71,7 +71,7 @@ User* addUser(User* user, char *name)
 int updateStatusNumber(User * user)
 {
 	Status * sPtr = NULL; 
- 	int sCount = 0;
+	int sCount = 0;
 
 	if ( user != NULL )
 		sPtr = user->status;
@@ -85,6 +85,53 @@ int updateStatusNumber(User * user)
 
 	// Update data in user node.
 	user->data->numberOfStatusNodes = sCount;
+	
+	return sCount;
+}
+
+// This is the number of instances a single status has,
+// It is store in struct element numberOfDirectNodes.
+int updateStatusInstanceNumber(Status * status)
+{
+	Instance* iPtr = NULL; 
+	int iCount = 0;
+
+	if ( status != NULL )
+		iPtr = status->instance;
+
+	// count:
+	while ( iPtr->next != NULL)
+	{
+		iPtr = getNextInstance(iPtr);
+		iCount++;
+	}
+
+	// Update data in user node.
+	status->numberOfDirectNodes = iCount;
+	
+	return iCount;
+
+}
+
+// This is the overall number of nodes in
+// the user struct.
+int updateInstanceNumber(User * user)
+{
+	Status * sPtr = NULL; 
+	int sCount = 0;
+
+	if ( user != NULL )
+		sPtr = user->status;
+
+	// count:
+	while ( sPtr->next != NULL)
+	{
+		sPtr = getNextStatus(sPtr);
+		sCount += sPtr->numberOfDirectNodes;
+	}
+
+	// Update data in user node.
+	user->data->numberOfInstanceNodes = sCount;
 	
 	return sCount;
 }
@@ -373,24 +420,27 @@ Status * getStatus(User *user, int id)
 
 Instance * getInstance(Status *status, int id)
 {
-   Instance* ptr = NULL;
-   Instance *current = NULL;
+   Instance *ptr = NULL;
 
-   current = status->instance;
-
-   do
+   if ( status != NULL )
    {
-      if ( current->id == id )
+      ptr = status->instance; // head of status.
+      while ( ptr->next != NULL )
       {
-    //WTF IS THIS!
-    ptr = current;
-    break;
-      }
-      else
-    current = current->next;
+        printf("\nPointer: %p - id: %d\n", ptr->next, ptr->name);
+        if ( ptr->id == id )
+        {
+	   // Doesn't this overwrite with head?
+	   //ptr = status->instance;
+	   break;
+        }
+        else
+	   if (ptr->next != NULL) // Redundant?
+	      ptr = ptr->next;
+	}
+   }
 
-   } while ( current->next != NULL );
-
+   // Return NULL if any issue.
    return ptr;
 }
 
@@ -674,5 +724,31 @@ int updateData(User * user)
 	// user node atm.
 	
 	return sNodes;
+}
+*/
+/*
+ * Old version.
+ * 
+Instance * getInstance(Status *status, int id)
+{
+   Instance* ptr = NULL;
+   Instance *current = NULL;
+
+   current = status->instance;
+
+   do
+   {
+      if ( current->id == id )
+      {
+	 //WTF IS THIS!
+	 ptr = current;
+	 break;
+      }
+      else
+    current = current->next;
+
+   } while ( current->next != NULL );
+
+   return ptr;
 }
 */

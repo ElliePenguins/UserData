@@ -38,7 +38,7 @@ Status * getUserStatus(User*);
 // Easy way to get the next node?
 User * getNextUser(User*);
 Status * getNextStatus(Status*);
-Instance * getNextInstance(Status*); // this one will be interesting.
+Instance * getNextInstance(Instance*); // this one will be interesting.
 
 User* getLastUser(User*);
 Status * getLastStatus(Status*);

@@ -41,12 +41,14 @@ Status * addStatus(Status *, char *name, char *notes);
 Status * initNewStatus(Status *);
 int deleteStatus(Status *, int id);
 
-Instance * addInstace(User *, Status *); 
-Instance * initNewInstance(User *, Status *);
+Instance * addInstance(User *, Status *, char * name, char notes); 
+Instance * initNewInstance(User *, Status *); // similar exists in userProfile module.
 //int deleteInstance(User *, Status *); Why would someone need this?
 
 // Update number of nodes in data.
 int updateStatusNumber(User * user);
+int updateInstanceNumber(User * user);
+int updateStatusInstanceNumber(Status * status); // count in status struct.
 
 // Check hashes in meta.
 User * validateUser(User *);

@@ -82,7 +82,7 @@ Status * getNextStatus(Status * status)
 
 Instance * getNextInstance(Instance * instance)
 {
-   return instance->next; 
+      return instance->next; 
 }
 
 // Find last.
@@ -136,6 +136,31 @@ Status * getLastStatus(Status * status)
    return r_ptr;
 }
 
+Instance * getLastInstance(Instance* instance)
+{
+	printf("getLast-> %s",instance->name);
+   Instance *ptr = instance;
+   Instance *r_ptr = instance;
+   
+   while ( ptr->next != NULL) 
+   {
+      ptr = getNextInstance(ptr);
+      if ( ptr->next == NULL )
+      {
+	r_ptr = ptr;
+	break;
+      }
+      else
+      {
+         // TODO: fix issue with next ptr in instance.
+	 ptr = ptr->next;
+      }
+   }
+
+   return r_ptr;
+}
+
+/*
 Instance * getLastInstance( Instance * instance)
 {
    while ( instance->next != NULL) 
@@ -143,6 +168,7 @@ Instance * getLastInstance( Instance * instance)
       
    return instance;
 }
+*/
 
 
 /*	Data Node Queries	*

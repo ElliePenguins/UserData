@@ -4,33 +4,33 @@
  * protypes in the userProfile.h header file.
  *
  * TODO: Create functions for searching UID/PID
- * 	 of nodes and assigning them to other
- * 	 and deciding how to assign them to other
- * 	 nodes.
- * 	 
+ *     of nodes and assigning them to other
+ *     and deciding how to assign them to other
+ *     nodes.
+ *     
  * Warning:
- * 		dangling ptrs can be this programs
- * 		kryptonite.
+ *       dangling ptrs can be this programs
+ *       kryptonite.
  *
  * Note:
- * 		See main() for a simple usage case,
- * 		and look at the other structs and
- * 		functions to get an idea for the
- * 		the internals, I suppose try to be
- * 		opened minded about usage possiblities?
+ *       See main() for a simple usage case,
+ *       and look at the other structs and
+ *       functions to get an idea for the
+ *       the internals, I suppose try to be
+ *       opened minded about usage possiblities?
  *
  * TODO:
- * 		Functions to free memory properly.
+ *       Functions to free memory properly.
  *
  * TODO:
- * 		functions that wrap create functions to
- * 		append new nodes to the respective
- * 		linked list by reference instead of
- * 		by returns, expecting the library
- * 		user to handle adding.
- * 		(although that should still be an
- * 		option if they wish via the original
- * 		routines.)
+ *       functions that wrap create functions to
+ *       append new nodes to the respective
+ *       linked list by reference instead of
+ *       by returns, expecting the library
+ *       user to handle adding.
+ *       (although that should still be an
+ *       option if they wish via the original
+ *       routines.)
  *
  * MIT License
  * Copyright (c) 2017 ElliePenguins 
@@ -49,7 +49,7 @@
 #include "format.h"
 
 /*
- * 	FUNCTIONS START:
+ *    FUNCTIONS START:
  */
 
 // Generic functions.
@@ -62,9 +62,9 @@ int setUserId(int preferedId)
    if (preferedId > id )
    {
       if ( preferedId > 0)
-	 id = preferedId;
+    id = preferedId;
       else
-	 id++;
+    id++;
    }
    else
       id++;
@@ -76,7 +76,7 @@ int setUserId(int preferedId)
 // TODO: Need a function that searches the list for used/unused ID's
 
 // Also: Should each node have a uuid, something that no-matter
-// 	 of what type a node is, it is always unique.
+//     of what type a node is, it is always unique.
 
 int setStatusId(int preferedId)
 {
@@ -85,9 +85,9 @@ int setStatusId(int preferedId)
    if (preferedId > id )
    {
       if ( preferedId > 0)
-	 id = preferedId;
+    id = preferedId;
       else
-	 id++;
+    id++;
    }
    else
       id++;
@@ -103,9 +103,9 @@ int setInstanceId(int preferedId)
    if (preferedId > id )
    {
       if ( preferedId > 0)
-	 id = preferedId;
+    id = preferedId;
       else
-	 id++;
+    id++;
    }
    else
       id++;
@@ -121,9 +121,9 @@ int setParentId(int preferedId)
    if (preferedId > id )
    {
       if ( preferedId > 0)
-	 id = preferedId;
+    id = preferedId;
       else
-	 id++;
+    id++;
    }
    else
       id++;
@@ -168,7 +168,7 @@ User * initUser( User * currentUser)
 {
   // TODO: if user == NULL, call function to create here?
    currentUser->data = initData(currentUser->data);
-		//TODO !debug segfault here: CONTINUE.
+      //TODO !debug segfault here: CONTINUE.
    currentUser->meta = initMeta(currentUser->meta);
    currentUser->status = initStatus(currentUser->status);
    
@@ -195,7 +195,7 @@ Data * createData( Data * currentData )
    currentData->numberOfNodes = 0;
    currentData->numberOfStatusNodes = 0;
    currentData->numberOfInstanceNodes = 0;  
-	// TODO: find a way to use init function.
+   // TODO: find a way to use init function.
    initData(currentData);
 
    return currentData;
@@ -290,7 +290,9 @@ Status * initStatus( Status * currentStatus )
    ptr->id = setStatusId(0);
    ptr->parentId = setParentId(0);
    ptr->numberOfDirectNodes = 0;
-   ptr->instance = NULL; 
+   ptr->instance = createInstance(NULL, currentStatus->name);
+   //ptr->instance = NULL; 
+
 
    ptr->next = NULL; // change the check if(prev == NULL) here.. 
 
@@ -351,18 +353,28 @@ Instance * createInstance(Instance *prev, const char * name)
    }
    else
    {
+      // TODO delegate this to initInstance();
+      puts("Instance Created"); // debug
       currentInstance = (Instance*) mallocWrap(sizeof(Instance));
+      // TODO:  Change this to point to the same string as statusPtr?
+      // or should they be able to change within context?
       currentInstance->name = mallocString(name);
       strcpy(currentInstance->name, name);
    
       currentInstance->id = setInstanceId(0);
       currentInstance->parentId = setParentId(0);
       createMeta(currentInstance->meta);
+      currentInstance->next = NULL;
 
+      // TODO:
+//      currentInstance = initInstance(currentInstance, NULL, NULL);
+      
+
+      // This if/else needs some work.
       if (prev == NULL)
-	 ; // code to handle linked list entries.
+        ; // code to handle linked list entries.
       else
-	 currentInstance->next = NULL; // fixed 
+        currentInstance->next = NULL; // fixed 
    }
    
    return currentInstance; // NULL if name not set.
@@ -490,7 +502,7 @@ int countNumberOfNodes(User* currentUser, const short int type)
    {
       while ( currentInstance->next != NULL) 
       {
-	 currentInstance = currentInstance->next;
+    currentInstance = currentInstance->next;
          instanceCount++;
       }
       currentStatus = currentStatus->next;
@@ -502,16 +514,16 @@ int countNumberOfNodes(User* currentUser, const short int type)
    switch (type)
    {
       case 1:
-	 ret_val = (instanceCount + statusCount);
-	 break;
+    ret_val = (instanceCount + statusCount);
+    break;
       case 2:
-	 ret_val = statusCount;
-	 break;
+    ret_val = statusCount;
+    break;
       case 3:
-	 ret_val = instanceCount;
-	 break;
+    ret_val = instanceCount;
+    break;
       default:
-	 fprintf(stderr, "Unknown error in setNumberOfNodes();");
+    fprintf(stderr, "Unknown error in setNumberOfNodes();");
    }
    
    return ret_val;
@@ -673,13 +685,13 @@ char * setMetaHash(Meta* currentMeta, const char * hash)
 // pid maybe.
 
 /*
-   static int id;	// TODO: init. 
+   static int id; // TODO: init. 
    if ( status != NULL )
    {
       if (preferedId > 0)
-	 status->id = id++;
+    status->id = id++;
       else
-	 status->id = preferedId;
+    status->id = preferedId;
    }
 
    return status->id;

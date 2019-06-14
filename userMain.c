@@ -121,7 +121,8 @@ int main ( void )
       break;
    case 3:
       // TODO: continue from here.
-      makeNewInstance(getStatus(userPtr, 0));   
+      //	get status might have an issue.
+      makeNewInstance(getStatus(userPtr, 1));   
             // todo: Modify to use getStatus instead. 
          // Or maybe create a set to last node for this one.
       break;
@@ -387,7 +388,9 @@ Status * makeNewStatus( Status * status)
 
 void makeNewInstance( Status * status)
 {
-   Instance * instance = getLastInstance(getInstance(status, 0));
+   // Continue debugging from here.
+   // omitting getLastInstance for now.
+   Instance * instance = getLastInstance(status->instance);
    instance->next = createInstance(instance, "Name");
 }
 
