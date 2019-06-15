@@ -163,6 +163,7 @@ int deleteUser(User * currentUser, int id)
 }
 
 // Pass it the head node.
+// These should be modified to add status anywhere in list.
 Status * addStatus(Status * status, char *name, char *notes)
 {
    if ( status == NULL )
@@ -182,6 +183,33 @@ Status * addStatus(Status * status, char *name, char *notes)
    }
 
    return status;
+}
+
+Instance* addInstance(Status * status, char *name, char *notes)
+{
+	Instance * iPtr = NULL;
+	
+   if ( status == NULL )
+   {
+		; // return null if issue with status.	
+   }
+   else
+   {
+		iPtr = status->instance;	
+		//
+      // find end of list and add.
+      while (iPtr->next != NULL)
+      {
+		  iPtr = iPtr->next;
+      }
+		
+      // Once found, create.
+		// TODO: create Instance does not take notes.
+      iPtr->next = createInstance(iPtr, name);
+      iPtr = iPtr->next;
+   }
+
+   return iPtr;
 }
 
 // TODO: Add an option for no id, that will delete the passed node.
@@ -224,7 +252,8 @@ int deleteStatus(Status * status, int id)
    return r_value;
 }
 
-Instance * addInstace(User * user, Status * status) 
+/*
+Instance * addInstance(User * user, char * name, char * notes) 
 {
    short int check = 0;
 
@@ -234,6 +263,7 @@ Instance * addInstace(User * user, Status * status)
    {
       userPtr = userPtr->next;
    }
+   //
    // Once end of list found, look for status
    const char *name = status->name; 
    Status * statusPtr = NULL;
@@ -269,6 +299,7 @@ Instance * addInstace(User * user, Status * status)
    // Returns NULL if there was an error.
    return newInstance;
 }
+*/
 
 // Cannot delete from get functions because you need to acces the
 // previous node to reattach the list. Consider a function.
@@ -430,13 +461,13 @@ Instance * getInstance(Status *status, int id)
         printf("\nPointer: %p - id: %d\n", ptr->next, ptr->name);
         if ( ptr->id == id )
         {
-	   // Doesn't this overwrite with head?
-	   //ptr = status->instance;
-	   break;
+		// Doesn't this overwrite with head?
+		//ptr = status->instance;
+		break;
         }
         else
-	   if (ptr->next != NULL) // Redundant?
-	      ptr = ptr->next;
+		if (ptr->next != NULL) // Redundant?
+			ptr = ptr->next;
 	}
    }
 
