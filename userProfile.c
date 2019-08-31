@@ -148,8 +148,9 @@ User * createUser(User *user, const char * name)
      currentUser->meta = createMeta(currentUser->meta);
      currentUser->status = createStatus(currentUser->status, name, "Head");
 
-     currentUser = initUser(currentUser);
-     
+ //    currentUser = initUser(currentUser);
+     initUser(currentUser);
+
      currentUser->next = NULL;
    }
    else
@@ -169,7 +170,7 @@ User * initUser( User * currentUser)
   // TODO: if user == NULL, call function to create here?
    currentUser->data = initData(currentUser->data);
       //TODO !debug segfault here: CONTINUE.
-   currentUser->meta = initMeta(currentUser->meta);
+//   currentUser->meta = initMeta(currentUser->meta);
    currentUser->status = initStatus(currentUser->status);
    
    // Assuming entry at end of list.
@@ -213,7 +214,7 @@ Data * initData ( Data * currentData )
       currentData = mallocWrap(sizeof(Data));
       currentData->date = time(NULL);
       currentData->meta = createMeta(NULL);
-      currentData->meta = initMeta(currentData->meta);
+  //    currentData->meta = initMeta(currentData->meta);
 
       // TODO: Init these by calling the proper functions.
       currentData->numberOfNodes = 0;
