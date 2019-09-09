@@ -383,15 +383,25 @@ Status * makeNewStatus( Status * status)
 
       Status *ptr = addStatus(status, buffer, notes_buffer);
 
-   return ptr;
+   	return ptr;
 }
 
 void makeNewInstance( Status * status)
 {
    // Continue debugging from here.
    // omitting getLastInstance for now.
+
+	char buffer[128];
+	char notes_buffer[128]; // Testing only, notes can be much larger.
+	printf("Please Enter Instance Name.");
+	prompt(PROMPT);
+	fgets (buffer, 127, stdin);
+	printf("Please Enter Instance Info.");
+	prompt(PROMPT);
+	fgets (notes_buffer, 127, stdin);
+
    Instance * instance = getLastInstance(status->instance);
-   instance->next = createInstance(instance, "Name");
+   instance->next = createInstance(instance, buffer);
 }
 
 void display(User *user)
