@@ -1,5 +1,9 @@
 # UserData
 
+### For those interested, start with:
+### UserProfile.h and UserProfile.C
+### userMain.c is for testing ONLY.
+
 This repository contains logic (functions) and elements (structs)	
 that can help when needing to deal with user information. 
 
