@@ -380,11 +380,12 @@ User * getUser(User *user, int id)
    return ptr;
 }
 
+
 User * getUserByName(User *user, char *name) 
 {
     User *userPtr = user; 
 
-    while ( userPtr->next != NULL)
+    while ( userPtr != NULL)
     {
         if( strcmp(name, getUserName(userPtr)) == 0) 
 		break;
@@ -392,8 +393,10 @@ User * getUserByName(User *user, char *name)
 	{
 		userPtr = userPtr->next;
 
+		/*
 		if ( userPtr->next == NULL)
 			userPtr = NULL; // return null
+		*/
 	}
     }
 

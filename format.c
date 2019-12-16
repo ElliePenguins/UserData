@@ -50,6 +50,15 @@ char * mallocString(const char * string)
 }
 
 
+char * newlineStrip(char * str)
+{
+   if ( str[strlen(str)-1] == '\n')
+      str[strlen(str)-1] = (char) 0x00;
+   
+   return str;
+
+}
+
 FILE * openFile( char * filename, char * options)
 {
    // Code for file access goes here.

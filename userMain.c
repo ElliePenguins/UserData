@@ -359,6 +359,7 @@ User * makeNewUser( User * user)
    printf("Please Enter the User's name: ");
    prompt(PROMPT);
    fgets(buffer, 127, stdin);
+   newlineStrip(buffer);
 
    // TODO:
    // Create input validation, however this is a simple test sourcefile. it
@@ -489,6 +490,7 @@ User * selectUser( User * user) {
     prompt(PROMPT);
     fgets(buffer, 127, stdin);
 
+    newlineStrip(buffer);
     userPtr = getUserByName(user, buffer);
 
     if (userPtr == NULL)
@@ -501,6 +503,7 @@ User * selectUser( User * user) {
 
    return userPtr; // Return found node.
 }
+
 
 /**************************************************************************
  *

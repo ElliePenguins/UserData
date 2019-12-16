@@ -17,6 +17,9 @@ void * mallocWrap( int numberOfbytes);
 // Same idea as above but for strings.
 char * mallocString(const char * string);
 
+// Strip newline chars from string.
+char * newlineStrip(char * str);
+
 // Handles opening files and any failures that may occure.
 FILE * openFile( char * filename, char * options);
 
