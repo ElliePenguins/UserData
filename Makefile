@@ -3,12 +3,12 @@
 # a menu that can be used to test various features of the library
 # for debug purposes. this is the default.
 #
-# The other option is library, which creates creates a shared
-# object file that provides the functionatlity to other programs  
+# The other option is library, which creates a shared object 
+# file that provides the functionatlity to other programs  
 # for handling user data. This is the purposes of this library
 # and will be the new default once we get further with this lib.
 #
-# TODO: We need an install option in here to add the library and
+# TODO: We need an install option to add the library and
 # 	header files to the include directory.
 #
 # MIT License
