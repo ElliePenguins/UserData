@@ -22,7 +22,7 @@ CC = gcc
 
 
 debug:	
-	gcc ${CCOPTS} format.c userProfile.c userInteraction.c userQuery.c 			userMain.c -o debug_run
+	gcc ${CCOPTS} format.c userProfile.c userInteraction.c userQuery.c 			userMain.c -o userdata 
 
 library:	
 	gcc ${CCOPTS} -c -fPIC format.c userProfile.c userInteraction.c userQuery.c 
