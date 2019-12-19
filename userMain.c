@@ -403,8 +403,8 @@ void makeNewInstance( Status * status)
 	prompt(PROMPT);
 	fgets (notes_buffer, 127, stdin);
 
-   Instance * instance = getLastInstance(status->instance);
-   instance->next = createInstance(instance, buffer);
+	Instance * instance = getLastInstance(status->instance);
+	instance->next = createInstance(instance, buffer);
 }
 
 void display(User *user)

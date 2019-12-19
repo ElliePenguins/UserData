@@ -10,7 +10,6 @@ bugs that were found when playing with the program.
 	node to head, but it will not forward search
 	the list.
 
-
 2)
 	Option 4 in usermain (delete) will delete
 	the node, however when you request to
@@ -18,27 +17,26 @@ bugs that were found when playing with the program.
 	program segfaults.
 
 3)	
-	Node pid are not setting properly. These are
-	supposed to be parrent ids, however they are
+	Node id's are not setting properly. pid's are
+	supposed to be parent id's, however they are
 	setting more like uid. (which might be an
 	intersting addition eventually.)
-
-4)
-	When attempting to make a new status in any user
-	an error message is shown saying pro1vided status
-	node is not free, Even when the user has just
-	been created.
-
+	
+	also id's need to be set 0 (head) to  n (tail)
+	not a unique id for every entity accross multiple
+	users. pid can be changed to uid; id is used for 
+	quickly searching the list, and needs to be fixed. 
+ 
 5)
-	Creating instance's of status's in general causes
-	a segfault.
+	Instance need to have an output option in the
+	test program "userMain."
 
 6)
 	Add Delete status's
 	and Evetually add delete instances of status's.
 
-7)
-	need add node to list functions.
+	* Need a delete everything method to clean up
+	  on program shutdown.
 	
 
 
