@@ -58,11 +58,11 @@ User* addUser(User* user, char *name)
       // find end of list and add.
       while (user->next != NULL)
       {
-			user = user->next;
+         user = user->next;
       }
       // Once found, create.
       user->next = createUser(user->next, name);
-      user = user->next;
+      //user = user->next;
    }
 
    return user;

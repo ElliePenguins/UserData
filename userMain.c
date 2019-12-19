@@ -213,8 +213,8 @@ void detailDisplay(User * user)
    switch(select)
    {
       case 1:
-    outputUser(user);
-    break;
+	outputUser(user);
+	break;
       case 2:
     // Remeber that status is a linked list too.
     puts("1 - id\n2 - name");
@@ -282,6 +282,7 @@ void outputMeta (User * user )
       printf("\nUser: %s -> Meta\n", user->name);
       puts("***************");
       printf("Meta node address: %p\n", user->meta);
+      
       printf("Creation Hash: %s\n"\
        "Last Modified Hash: %s\n",
        getCreationHash(user->meta), // example: getMeta(user);

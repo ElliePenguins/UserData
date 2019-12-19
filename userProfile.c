@@ -140,12 +140,20 @@ User * createUser(User *user, const char * name)
    {
      // Create Single Instance. 
      currentUser = mallocWrap(sizeof(User));
-     currentUser->name = mallocString(name);
-     strcpy(currentUser->name, name);
+     if (strlen(name) > 0)
+     {
+	currentUser->name = mallocString(name);
+	strcpy(currentUser->name, name);
+     }
 
      // These have their initialize functions called internally.
      currentUser->data = createData(currentUser->data);
-     currentUser->meta = createMeta(currentUser->meta);
+//     currentUser->meta = createMeta(NULL);
+// createMeta(currentUser->meta);
+	// THE ISSUE EXISTS IN CREATE META. TODO move to function.
+     currentUser->meta = (Meta*) mallocWrap(sizeof(Meta));
+     initMeta(currentUser->meta);
+
      currentUser->status = createStatus(currentUser->status, name, "Head");
 
  //    currentUser = initUser(currentUser);
@@ -228,16 +236,21 @@ Data * initData ( Data * currentData )
 // Meta initialization.
 Meta * createMeta(Meta * ptr)
 {
-   if (ptr == NULL)
-   {
-      ptr = (Meta*) mallocWrap(sizeof(Meta));
-   }
+   if (ptr != NULL)
+	   free(ptr);
+
+   ptr = (Meta*) mallocWrap(sizeof(Meta));
 
    // TODO: decide on a hash algorithm and implement.
-   ptr->creationHash = NULL;
-   ptr->lastModifiedHash = NULL;
+   //ptr->creationHash = NULL;
+   //ptr->lastModifiedHash = NULL;
 
    initMeta(ptr);
+
+   ptr->creationHash = NULL; //setMetaHash(ptr, "aa55"); 
+   ptr->lastModifiedHash = NULL; //setMetaHash(ptr, "ef02");
+   setMetaHash(ptr, "aa55"); 
+   setLastModHash(ptr, "ef02");
 
    ptr->creationTime = time(0);
    ptr->lastModifiedTime = time(0); // hasn't been mod yet.
@@ -535,17 +548,18 @@ int countNumberOfNodes(User* currentUser, const short int type)
 // TODO: Why are we passing this a meta node?
 char * setMetaHash(Meta* currentMeta, const char * hash)
 {
-   char * r_hashPtr = NULL;
+   //char * r_hashPtr = NULL;
 
-   r_hashPtr = (char*) mallocString(hash);
-   strcpy(r_hashPtr, hash);
+   //r_hashPtr = (char*) mallocString(hash);
+   //strcpy(r_hashPtr, hash);
 
-//   free(currentMeta->creationHash);
-//   currentMeta->creationHash= (char*) mallocString(hash);
-//   strcpy(currentMeta->creationHash, hash);
+     if ( currentMeta->creationHash != NULL)
+	free(currentMeta->creationHash);
+     currentMeta->creationHash= (char*) mallocString(hash);
+     strcpy(currentMeta->creationHash, hash);
 
 //return currentMeta->creationHash;
-   return r_hashPtr;
+   return currentMeta->creationHash;
 }
 
 // Don't forget about this one? can set last without return.
@@ -555,8 +569,8 @@ char * setLastModHash(Meta* meta, char* hash)
    if (meta->lastModifiedHash == NULL)
    {
         // Optionally set internally?
-//      meta->lastModifiedHash= (char*) mallocString(hash);
-//      strcpy(meta->lastModifiedHash, hash);
+      meta->lastModifiedHash= (char*) mallocString(hash);
+      strcpy(meta->lastModifiedHash, hash);
    } 
    else
    {
