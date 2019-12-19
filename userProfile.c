@@ -306,10 +306,17 @@ Status * createStatus(Status *prev, const char * name, const char *notes)
 
    // Let a serperate function handle init defaults.
    ptr = initStatus(ptr);
+   // TEMP for debug, move to function.
+   if ( prev != NULL )
+   {
+      ptr->id = setStatusId(prev->id+1);
+   }
+   printf("DEBUG: id = %d\n", ptr->id);
 
    return ptr;
 }
 
+// Only use this for new nodes, not zeroing out values in nodes.
 Status * initStatus( Status * currentStatus )
 {
    Status * ptr = NULL;
@@ -321,7 +328,6 @@ Status * initStatus( Status * currentStatus )
    ptr->numberOfDirectNodes = 0;
    ptr->instance = createInstance(NULL, currentStatus->name);
    //ptr->instance = NULL; 
-
 
    ptr->next = NULL; // change the check if(prev == NULL) here.. 
 

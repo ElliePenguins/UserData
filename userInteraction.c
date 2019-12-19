@@ -173,17 +173,10 @@ Status * addStatus(Status * status, char *name, char *notes)
    }
    else
    {
-      // find end of list and add.
-      /*
-      while (status->next != NULL)
-      {
-	    status = status->next;
-      }
-      */
       s = getLastStatus(status);
       printf("DEBUG: %s\n", s->name);
       // Once found, create.
-      s->next = createStatus(s->next, name, notes);
+      s->next = createStatus(s, name, notes);
    }
 
    // return new node.
