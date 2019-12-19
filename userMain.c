@@ -376,6 +376,7 @@ Status * makeNewStatus( Status * status)
 {
       char buffer[128];
       char notes_buffer[128]; // Testing only, notes can be much larger.
+
       printf("Please Enter status Name.");
       prompt(PROMPT);
       fgets (buffer, 127, stdin);
@@ -383,9 +384,9 @@ Status * makeNewStatus( Status * status)
       prompt(PROMPT);
       fgets (notes_buffer, 127, stdin);
 
-      Status *ptr = addStatus(status, buffer, notes_buffer);
+      addStatus(status, buffer, notes_buffer);
 
-   	return ptr;
+      return getLastStatus(status);
 }
 
 void makeNewInstance( Status * status)

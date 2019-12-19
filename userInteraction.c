@@ -166,6 +166,7 @@ int deleteUser(User * currentUser, int id)
 // These should be modified to add status anywhere in list.
 Status * addStatus(Status * status, char *name, char *notes)
 {
+   Status * s;
    if ( status == NULL )
    {
       status = createStatus(status, name, notes);
@@ -173,16 +174,20 @@ Status * addStatus(Status * status, char *name, char *notes)
    else
    {
       // find end of list and add.
+      /*
       while (status->next != NULL)
       {
-    status = status->next;
+	    status = status->next;
       }
+      */
+      s = getLastStatus(status);
+      printf("DEBUG: %s\n", s->name);
       // Once found, create.
-      status->next = createStatus(status->next, name, notes);
-      status = status->next;
+      s->next = createStatus(s->next, name, notes);
    }
 
-   return status;
+   // return new node.
+   return s->next;
 }
 
 Instance* addInstance(Status * status, char *name, char *notes)
@@ -416,10 +421,8 @@ Status * getStatusByName(Status *status, char *name)
         else
 	{
 		statusPtr = statusPtr->next;
-/*
-		if ( statusPtr->next == NULL)
-			statusPtr = NULL; // return null, not found.
-			*/
+		if ( statusPtr = NULL)
+			break;
 	}
     }
 

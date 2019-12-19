@@ -56,20 +56,27 @@
 
 int setUserId(int preferedId)
 {
-   // Does .bss initialize to 0 at startup?
+   // start from 1 on each status list.
    static int id = 0;
+   int r_id = 0;
 
    if (preferedId > id )
    {
       if ( preferedId > 0)
-    id = preferedId;
+	r_id = preferedId;
       else
-    id++;
+      {
+	r_id = id;
+        id++;
+      }
    }
    else
+   {
+      r_id = id;
       id++;
+   }
 
-   return id; 
+   return r_id; 
    
 }
 
@@ -80,19 +87,27 @@ int setUserId(int preferedId)
 
 int setStatusId(int preferedId)
 {
+   // start from 1 on each status list.
    static int id = 0;
+   int r_id = 0;
 
    if (preferedId > id )
    {
       if ( preferedId > 0)
-    id = preferedId;
+	r_id = preferedId;
       else
-    id++;
+      {
+	r_id = id;
+        id++;
+      }
    }
    else
+   {
+      r_id = id;
       id++;
+   }
 
-   return id; 
+   return r_id; 
    
 }
 
