@@ -25,8 +25,30 @@ debug:
 	gcc ${CCOPTS} format.c userProfile.c userInteraction.c userQuery.c 			userMain.c -o userdata 
 
 library:	
-	gcc ${CCOPTS} -c -fPIC format.c userProfile.c userInteraction.c userQuery.c 
+	gcc -c -fPIC format.c userProfile.c userInteraction.c userQuery.c 
 	gcc -shared format.o userProfile.o userInteraction.o userQuery.o 			-o userdata.so
+	make clean
+
+install:
+	mkdir -p /usr/lib/UserData
+	cp userdata.so /usr/lib/UserData/
+	mkdir -p /usr/include
+	cp UserData.h /usr/include
+
+local:
+	mkdir -p usr/lib/UserData
+	cp userdata.so usr/lib/UserData/
+	mkdir -p usr/include
+	cp UserData.h usr/include
 
 clean:
 	rm format.o userProfile.o userInteraction.o userQuery.o
+
+localDelete:
+	rm -r usr/lib/UserData
+	rm usr/include/UserData.h
+
+delete:
+	rm -r /usr/lib/UserData
+	rm /usr/include/UserData.h
+
