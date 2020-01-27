@@ -61,6 +61,7 @@ int prompt ( char * str );
 // Detailed outputs.
 void outputUser(User *);
 void outputStatus(User *,Status *);
+void outputInstance(Status * status);
 void outputMeta(User *);
 
 int main ( void ) 
@@ -238,6 +239,21 @@ void detailDisplay(User * user)
     break;
    }
 }
+void outputInstance( Status * status)
+{
+      Instance *instance = NULL;
+      instance = status->instance;
+   
+      printf("Instance node name: %s\n",  instance->name);
+      puts("***************");
+      printf("Instance node address: %p\n", instance);
+      printf("Instance ID: %d\nInstance pid: %d",
+       // TODO: Status node output functions.
+       instance->id,
+       instance->parentId);
+      printf("\nIncluded Notes: %s", instance->notes);
+      waitKey();
+}
 
 void outputStatus( User * user, Status * status)
 {
@@ -312,6 +328,7 @@ int menu( void )
    puts(" 5\t-\tDisplay");
    puts(" 6\t-\tDetailed Display");
    puts(" 7\t-\tSelect User");
+   puts(" 8\t-\tSelect Status");
    
    // Need Delete User
    // Need display all. 
@@ -356,7 +373,8 @@ User * makeNewUser( User * user)
    char buffer[128];
    User *uPtr = NULL;
     
-   scanf("%c", buffer[0]); // Clear stdin. 
+   // this clear acts up on some platforms. (debian)
+//   scanf("%c", buffer[0]); // Clear stdin. 
    printf("Please Enter the User's name: ");
    prompt(PROMPT);
    fgets(buffer, 127, stdin);

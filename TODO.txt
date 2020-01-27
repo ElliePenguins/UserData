@@ -38,5 +38,13 @@ bugs that were found when playing with the program.
 	* Need a delete everything method to clean up
 	  on program shutdown.
 	
+7)
+	Don't allow creating nodes on the HEAD node.
+		- Or should this be left up to 
+		  the developer using the lib.
+		- Either way it segfaults.
 
+8)	Hashes are still just hardcoded values, add 
+	hashing library.
 
+9)	add display instance to userMain.c for testing.	
