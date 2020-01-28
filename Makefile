@@ -34,6 +34,11 @@ install:
 	cp userdata.so /usr/lib/UserData/
 	mkdir -p /usr/include
 	cp UserData.h /usr/include
+	mkdir /usr/include/UserData
+	cp userProfile.h /usr/include/UserData
+	cp userInteraction.h /usr/include/UserData
+	cp userQuery.h /usr/include/UserData
+	cp format.h /usr/include/UserData
 
 local:
 	mkdir -p usr/lib/UserData
